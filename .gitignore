@@ -1,0 +1,26 @@
+# intellij files
+/.idea/
+
+# python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# node files
+/node_modules/
+
+# migrations
+/fweather/migrations/*.py
+
+# env files
+/.env
+
+# db files
+*.sqlite3
+
+# static
+/static/
+
+# creds
+credentials.json
+client_id.json

@@ -1,0 +1,16 @@
+[requires]
+python_version = "3.6"
+
+[packages]
+django = "*"
+gunicorn = "*"
+email-validator = "*"
+zipcodes = "*"
+dj-database-url = "*"
+"psycopg2" = "*"
+google-api-python-client = "*"
+whitenoise = "*"
+django-dotenv = "*"
+asyncio = "*"
+giphy-client = "*"
+requests = "*"
