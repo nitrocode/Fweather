@@ -22,6 +22,8 @@ Receiving an email for subscriber in Woburn, MA after verification.
 * Sign up for the [gmail api]() to send emails
     * Purposely didn't use Klaviyo or MailChimp because that would make the app WAY too easy ;)
 * Insert tokens in the [`.env`](https://medium.com/@thejasonfile/using-dotenv-package-to-create-environment-variables-33da4ac4ea8f) file to keep sensitive information stored as environment variables
+    * `.env` is committed so do not upload a personal one by mistake. Run the command below to ignore local changes.
+    * `git update-index --assume-unchanged .env`
 
 ## Quick start
 
