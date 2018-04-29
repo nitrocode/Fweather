@@ -159,6 +159,6 @@ I could have...
     |---|---|
     | Anchorage, AK  | 99501  |
     | Austin, TX  | 73301  |
-    | Boston, MA  | 02101  |
+    | Boston, MA  | 02111  |
     | Seattle, WA  | 98101  |
     | Washington, DC  | 20001  |
