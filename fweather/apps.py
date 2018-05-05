@@ -10,7 +10,7 @@ class FweatherConfig(AppConfig):
         # check or get the token on boot
         logging.info("GMAIL: Get refresh token...")
         try:
-            gmail = Gmail()
+            Gmail()
             logging.info("GMAIL: ...DONE")
         except:
             logging.info("GMAIL: ...FAIL")

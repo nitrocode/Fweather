@@ -5,7 +5,6 @@ from urllib.parse import urlencode
 import statistics as s
 import logging
 
-
 URL = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?{}'
 PARAMS = {
     'key': os.getenv('wwo'),
@@ -41,10 +40,8 @@ def get_monthly_average_temps(data, celsius=False):
     if celsius:
         min_temp = min_temp[:-2]
         max_temp = max_temp[:-2]
-    return [
-        (float(month[min_temp]) + float(month[max_temp])) / 2.0
-        for month in data['ClimateAverages'][0]['month']
-    ]
+    return [(float(month[min_temp]) + float(month[max_temp])) / 2.0
+            for month in data['ClimateAverages'][0]['month']]
 
 
 def get_yearly_average_temp(data, celsius=False):

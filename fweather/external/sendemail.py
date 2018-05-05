@@ -42,7 +42,8 @@ class Gmail(object):
             os.close(fd)
             credentials = tools.run_flow(flow, store, http=http)
         http = credentials.authorize(http)
-        self.service = discovery.build('gmail', 'v1', http=http, cache_discovery=False)
+        self.service = discovery.build(
+            'gmail', 'v1', http=http, cache_discovery=False)
 
     def create_message(self, to, subject, body):
         """Create an HTML message containing the correct headers.
@@ -62,7 +63,8 @@ class Gmail(object):
     def send(self, to, subject, body):
         message = self.create_message(to, subject, body)
         try:
-            res = (self.service.users().messages().send(userId='me', body=message).execute())
+            res = (self.service.users().messages().send(
+                userId='me', body=message).execute())
             return res
         except errors.HttpError as error:
             logging.error('An error occurred: %s' % error)
@@ -85,13 +87,12 @@ if __name__ == '__main__':
     msg_body = 'Your <strong>body</strong> is a temple'
 
     gmail = Gmail()
-    
+
     start = time.time()
 
     loop = asyncio.get_event_loop()
     tasks = [
-        gmail.asend(receive_email, subj.format(i), msg_body)
-        for i in range(1)
+        gmail.asend(receive_email, subj.format(i), msg_body) for i in range(1)
     ]
     loop.run_until_complete(asyncio.wait(tasks))
     loop.close()

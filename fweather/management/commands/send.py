@@ -20,12 +20,12 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         """Add basic args to send command."""
-        parser.add_argument('--email',
-                            help='Send to a particular email')
-        parser.add_argument('--email-all',
-                            action="store_true",
-                            default=False,
-                            help='Send to all emails in database')
+        parser.add_argument('--email', help='Send to a particular email')
+        parser.add_argument(
+            '--email-all',
+            action="store_true",
+            default=False,
+            help='Send to all emails in database')
 
     def handle(self, *args, **options):
         """Handle my subscribers.
@@ -59,8 +59,9 @@ class Command(BaseCommand):
             return
         elif email_all:
             # Avoid accidents if emailing all
-            cont = input('Are you sure you want to email {} people? [N]/y '.format(
-                len(subscribers)))
+            cont = input(
+                'Are you sure you want to email {} people? [N]/y '.format(
+                    len(subscribers)))
 
             if not cont.lower() == 'y':
                 logging.info("User exited")
@@ -107,8 +108,8 @@ class Command(BaseCommand):
             Location: {}, {}<br />
             Weather: {} °{}<br /><br />
             <img src="{}"><br /><br />
-        """.format(icon, zip_code, loc['city'], loc['state'], current,
-                   'F', gif)
+        """.format(icon, zip_code, loc['city'], loc['state'], current, 'F',
+                   gif)
         self.gmail.send(sub.email.email, subject, body)
         logging.info(sub.email.email)
         logging.info(body)

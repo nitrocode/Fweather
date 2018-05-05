@@ -5,7 +5,6 @@ import dotenv
 import random
 import logging
 
-
 PARAMS = {
     'api_key': os.getenv('giphy'),
     'limit': 25,

@@ -256,5 +256,14 @@
             "version": "==1.0.4"
         }
     },
-    "develop": {}
+    "develop": {
+        "yapf": {
+            "hashes": [
+                "sha256:7d8ae3567f3fb2d288f127d35e4decb3348c96cd091001e02e818465da618f90",
+                "sha256:dd23b52edbb4c0461d0383050f7886175b0df9ab8fd0b67edd41f94e25770993"
+            ],
+            "index": "pypi",
+            "version": "==0.21.0"
+        }
+    }
 }

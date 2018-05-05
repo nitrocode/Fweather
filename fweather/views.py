@@ -19,9 +19,7 @@ class AboutPageView(TemplateView):
 
 
 def sign_up(request):
-    data = {
-        'success': False
-    }
+    data = {'success': False}
     email = request.POST['email_name'].lower()
     zip_code = request.POST['zip_code_name']
     # validate email
@@ -44,7 +42,7 @@ def sign_up(request):
     try:
         # if email does not exist, then add it
         new_email, created = Email.objects.get_or_create(
-          email=email, defaults={'email': email})
+            email=email, defaults={'email': email})
         # created = True
         # if email is created, then
         if created:
@@ -58,7 +56,8 @@ def sign_up(request):
             gmail = Gmail()
             # verify email
             gmail.send(
-                email, 'Verify your email for Fweather!',
+                email,
+                'Verify your email for Fweather!',
                 'Click <a href="{}/verify?id={}">here</a> to verify!'.format(
                     request.build_absolute_uri(), sub.verify_guid),
             )
