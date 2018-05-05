@@ -42,7 +42,7 @@ class Gmail(object):
             os.close(fd)
             credentials = tools.run_flow(flow, store, http=http)
         http = credentials.authorize(http)
-        self.service = discovery.build('gmail', 'v1', http=http)
+        self.service = discovery.build('gmail', 'v1', http=http, cache_discovery=False)
 
     def create_message(self, to, subject, body):
         """Create an HTML message containing the correct headers.
