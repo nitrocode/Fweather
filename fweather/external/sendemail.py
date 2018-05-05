@@ -8,6 +8,7 @@ import asyncio
 import time
 import os
 import tempfile
+import logging
 
 
 class Gmail(object):
@@ -64,7 +65,7 @@ class Gmail(object):
             res = (self.service.users().messages().send(userId='me', body=message).execute())
             return res
         except errors.HttpError as error:
-            print('An error occurred: %s' % error)
+            logging.error('An error occurred: %s' % error)
 
     async def asend(self, to, subject, body):
         """Sends the email asynchronously
@@ -95,4 +96,4 @@ if __name__ == '__main__':
     loop.run_until_complete(asyncio.wait(tasks))
     loop.close()
 
-    print('Total time: {}'.format(time.time() - start))
+    logging.info('Total time: {}'.format(time.time() - start))

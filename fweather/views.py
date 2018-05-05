@@ -4,6 +4,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from fweather.models import Subscriber, Email
 from fweather.external.sendemail import Gmail
+import logging
 # validators
 from email_validator import validate_email, EmailNotValidError
 import zipcodes
@@ -47,7 +48,7 @@ def sign_up(request):
         # created = True
         # if email is created, then
         if created:
-            print('created')
+            logging.info('created email {}'.format(email))
             # add subscriber
             sub, created = Subscriber.objects.get_or_create(
                 email=new_email,
@@ -61,9 +62,9 @@ def sign_up(request):
                 'Click <a href="{}/verify?id={}">here</a> to verify!'.format(
                     request.build_absolute_uri(), sub.verify_guid),
             )
-            print('email sent')
+            logging.info('email sent')
         else:
-            print('not created')
+            logging.info('not created')
     except IntegrityError:
         # This error was thrown when a duplicate was found.
         # Set defaults on email to avoid this.

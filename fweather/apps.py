@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 from fweather.external.sendemail import Gmail
+import logging
 
 
 class FweatherConfig(AppConfig):
@@ -7,9 +8,9 @@ class FweatherConfig(AppConfig):
 
     def ready(self):
         # check or get the token on boot
-        print("GMAIL: Get refresh token...")
+        logging.info("GMAIL: Get refresh token...")
         try:
             gmail = Gmail()
-            print("GMAIL: ...DONE")
+            logging.info("GMAIL: ...DONE")
         except:
-            print("GMAIL: ...FAIL")
+            logging.info("GMAIL: ...FAIL")

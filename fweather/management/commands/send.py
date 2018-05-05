@@ -7,6 +7,7 @@ from fweather.external import giphy
 import zipcodes
 import asyncio
 import time
+import logging
 
 
 class Command(BaseCommand):
@@ -46,15 +47,15 @@ class Command(BaseCommand):
                         Subscriber.objects.get(email=email, subscribe=True)
                     ]
                 except ObjectDoesNotExist:
-                    print('Subscriber found but they have not verified their email or chose to unsubscribe.')
-                    pass
+                    logging.info('Subscriber found but they have not verified '
+                                 'their email or chose to unsubscribe.')
         elif email_all:
             # run through all the subscribers on the list
             subscribers = Subscriber.objects.filter(subscribe=True)
 
         # do nothing if no subscribers
         if len(subscribers) == 0:
-            print("No verified subscribers found.")
+            logging.info("No verified subscribers found.")
             return
         elif email_all:
             # Avoid accidents if emailing all
@@ -62,7 +63,7 @@ class Command(BaseCommand):
                 len(subscribers)))
 
             if not cont.lower() == 'y':
-                print("User exited")
+                logging.info("User exited")
                 return
 
         # Time this
@@ -76,7 +77,7 @@ class Command(BaseCommand):
         loop.run_until_complete(asyncio.wait(tasks))
         loop.close()
 
-        print('Total time: {}'.format(time.time() - start))
+        logging.info('Total time: {}'.format(time.time() - start))
 
     async def send(self, sub):
         """Send a weather email with a gif to a subscriber.
@@ -109,5 +110,5 @@ class Command(BaseCommand):
         """.format(icon, zip_code, loc['city'], loc['state'], current,
                    'F', gif)
         self.gmail.send(sub.email.email, subject, body)
-        print(sub.email.email)
-        print(body)
+        logging.info(sub.email.email)
+        logging.info(body)

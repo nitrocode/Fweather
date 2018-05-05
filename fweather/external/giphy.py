@@ -3,6 +3,8 @@ from giphy_client.rest import ApiException
 import os
 import dotenv
 import random
+import logging
+
 
 PARAMS = {
     'api_key': os.getenv('giphy'),
@@ -28,10 +30,10 @@ def get_random_giphy(query):
         api_response = API_INSTANCE.gifs_search_get(**params)
         return random.sample(api_response.data, 1)[0].images.original.url
     except ApiException as e:
-        print("Exception when calling DefaultApi->gifs_search_get: %s\n" % e)
+        logging.error("Exception calling giphy's search_get: {}".format(e))
 
 
 if __name__ == '__main__':
     dotenv.read_dotenv('../../.env')
-    params['api_key'] = os.getenv('giphy')
-    print(get_random_giphy('partly raining'))
+    PARAMS['api_key'] = os.getenv('giphy')
+    logging.info(get_random_giphy('partly raining'))

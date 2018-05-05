@@ -95,6 +95,7 @@ Login on http://localhost:8000/admin
 - [x] use giphy api to get a related weather gif
 - [x] email contains a gif
 - [x] prompt "are you sure?" before sending email to everyone on the list
+- [x] Replace `print` statements with `logging`
 
 ## Extra
 

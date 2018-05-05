@@ -3,6 +3,7 @@ import os
 import requests
 from urllib.parse import urlencode
 import statistics as s
+import logging
 
 
 URL = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?{}'
@@ -102,5 +103,5 @@ if __name__ == '__main__':
     mean = get_yearly_average_temp(w_data)
     current = get_current_temp(w_data)
 
-    print('Weather for {} is {}'.format(zip_code, current))
-    print('mean temp is {}'.format(mean))
+    logging.info('Weather for {} is {}'.format(zip_code, current))
+    logging.info('mean temp is {}'.format(mean))
