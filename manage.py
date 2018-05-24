@@ -4,18 +4,20 @@ import sys
 import dotenv
 import logging
 
+logger = logging.getLogger(__name__)
+
 
 if __name__ == "__main__":
     dotenv.read_dotenv()
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fweather.settings")
     if not 'gmail' in os.environ:
-        logging.info('gmail environment variable is empty...')
-        logging.info('attempting to read from file...')
+        logger.info('gmail environment variable is empty...')
+        logger.info('attempting to read from file...')
         root_dir = os.path.dirname(os.path.abspath(__file__))
         client_file = os.path.join(root_dir, 'client_id.json')
         with open(client_file, 'r') as f:
             os.environ['gmail'] = f.read()
-            logging.info('...saved environment variable!')
+            logger.info('...saved environment variable!')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

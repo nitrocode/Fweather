@@ -5,6 +5,8 @@ from urllib.parse import urlencode
 import statistics as s
 import logging
 
+logger = logging.getLogger(__name__)
+
 URL = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?{}'
 PARAMS = {
     'key': os.getenv('wwo'),
@@ -100,5 +102,5 @@ if __name__ == '__main__':
     mean = get_yearly_average_temp(w_data)
     current = get_current_temp(w_data)
 
-    logging.info('Weather for {} is {}'.format(zip_code, current))
-    logging.info('mean temp is {}'.format(mean))
+    logger.info('Weather for {} is {}'.format(zip_code, current))
+    logger.info('mean temp is {}'.format(mean))

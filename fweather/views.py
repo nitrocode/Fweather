@@ -9,6 +9,8 @@ import logging
 from email_validator import validate_email, EmailNotValidError
 import zipcodes
 
+logger = logging.getLogger(__name__)
+
 
 class HomePageView(TemplateView):
     template_name = 'signup.html'
@@ -46,7 +48,7 @@ def sign_up(request):
         # created = True
         # if email is created, then
         if created:
-            logging.info('created email {}'.format(email))
+            logger.info('created email {}'.format(email))
             # add subscriber
             sub, created = Subscriber.objects.get_or_create(
                 email=new_email,
@@ -61,9 +63,9 @@ def sign_up(request):
                 'Click <a href="{}/verify?id={}">here</a> to verify!'.format(
                     request.build_absolute_uri(), sub.verify_guid),
             )
-            logging.info('email sent')
+            logger.info('email sent')
         else:
-            logging.info('not created')
+            logger.info('not created')
     except IntegrityError:
         # This error was thrown when a duplicate was found.
         # Set defaults on email to avoid this.
