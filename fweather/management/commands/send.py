@@ -9,6 +9,8 @@ import asyncio
 import time
 import logging
 
+logger = logging.getLogger(__name__)
+
 
 class Command(BaseCommand):
     help = 'Send fun weather emails'
@@ -47,15 +49,15 @@ class Command(BaseCommand):
                         Subscriber.objects.get(email=email, subscribe=True)
                     ]
                 except ObjectDoesNotExist:
-                    logging.info('Subscriber found but they have not verified '
-                                 'their email or chose to unsubscribe.')
+                    logger.info('Subscriber found but they have not verified '
+                                'their email or chose to unsubscribe.')
         elif email_all:
             # run through all the subscribers on the list
             subscribers = Subscriber.objects.filter(subscribe=True)
 
         # do nothing if no subscribers
         if len(subscribers) == 0:
-            logging.info("No verified subscribers found.")
+            logger.info("No verified subscribers found.")
             return
         elif email_all:
             # Avoid accidents if emailing all
@@ -64,7 +66,7 @@ class Command(BaseCommand):
                     len(subscribers)))
 
             if not cont.lower() == 'y':
-                logging.info("User exited")
+                logger.info("User exited")
                 return
 
         # Time this
@@ -78,7 +80,7 @@ class Command(BaseCommand):
         loop.run_until_complete(asyncio.wait(tasks))
         loop.close()
 
-        logging.info('Total time: {}'.format(time.time() - start))
+        logger.info('Total time: {}'.format(time.time() - start))
 
     async def send(self, sub):
         """Send a weather email with a gif to a subscriber.
@@ -111,5 +113,5 @@ class Command(BaseCommand):
         """.format(icon, zip_code, loc['city'], loc['state'], current, 'F',
                    gif)
         self.gmail.send(sub.email.email, subject, body)
-        logging.info(sub.email.email)
-        logging.info(body)
+        logger.info(sub.email.email)
+        logger.info(body)

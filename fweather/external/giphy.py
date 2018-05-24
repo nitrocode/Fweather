@@ -5,6 +5,8 @@ import dotenv
 import random
 import logging
 
+logger = logging.getLogger(__name__)
+
 PARAMS = {
     'api_key': os.getenv('giphy'),
     'limit': 25,
@@ -29,10 +31,10 @@ def get_random_giphy(query):
         api_response = API_INSTANCE.gifs_search_get(**params)
         return random.sample(api_response.data, 1)[0].images.original.url
     except ApiException as e:
-        logging.error("Exception calling giphy's search_get: {}".format(e))
+        logger.error("Exception calling giphy's search_get: {}".format(e))
 
 
 if __name__ == '__main__':
     dotenv.read_dotenv('../../.env')
     PARAMS['api_key'] = os.getenv('giphy')
-    logging.info(get_random_giphy('partly raining'))
+    logger.info(get_random_giphy('partly raining'))
