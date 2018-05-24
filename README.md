@@ -54,6 +54,17 @@ js and css
 
 Note: The `--noreload` is important as it will prevent the app from running the overriden `ready()` function twice. The app gets the gmail refresh token on django start.
 
+In production environments, it's better to run it using `gunicorn`.
+
+    gunicorn fweather.wsgi
+
+It's also runable in docker if using ECS or Docker Swarm / Kubernetes to deploy.
+
+    # build
+    docker build -t fweather .
+    # run daemonized
+    docker run -p 8000:8000 -d fweather
+
 ## Admin panel
 
 Register
