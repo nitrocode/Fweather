@@ -24,3 +24,6 @@ __pycache__/
 # creds
 credentials.json
 client_id.json
+
+# logs
+/logs
